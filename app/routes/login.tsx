@@ -84,7 +84,6 @@ export default function Login() {
 
     // Updates the form data when an input changes
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, field: string) => {
-		
         setFormData(form => ({ ...form, [field]: event.target.value }))
     }
 
@@ -112,13 +111,11 @@ export default function Login() {
     }, [formData])
 
     useEffect(() => {
-		console.log(66);
-		
-		firstLoad.current = false ;
-        // We don't want to reset errors on page load because we want to see them
+        console.log(firstLoad.current);
         
-		
-    }, [])
+        // We don't want to reset errors on page load because we want to see them
+		firstLoad.current = false ;
+    }, []);
 
     return (
         <Layout>
