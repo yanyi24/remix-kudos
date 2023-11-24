@@ -1,5 +1,9 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+type Profile {
+  firstName String
+  lastName  String
+}
 
 generator client {
   provider = "prisma-client-js"
@@ -16,4 +20,5 @@ model User {
   updatedAt DateTime @updatedAt
   email     String   @unique
   password  String
+  profile   Profile
 }
