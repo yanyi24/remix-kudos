@@ -81,6 +81,7 @@ export default function Login() {
         firstName: actionData?.fields?.firstName || '',
         lastName: actionData?.fields?.lastName || '',
     })
+console.log(action);
 
     // Updates the form data when an input changes
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, field: string) => {
