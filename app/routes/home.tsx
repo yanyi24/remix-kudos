@@ -20,7 +20,8 @@ export const loader: LoaderFunction = async ({request}) => {
     const userId = await requireUserId(request);
     const users = await getOtherUsers(userId);
 	const recentKudos = await getRecentKudos()
-
+  
+    
     const url = new URL(request.url);
     const sort = url.searchParams.get('sort');
     const filter = url.searchParams.get('filter');
