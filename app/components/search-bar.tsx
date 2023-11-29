@@ -17,11 +17,12 @@ export function SearchBar() {
 		sort: ''
 	});
 
-	const handleChange = (e: React.ChangeEvent<HTMLSelectElement>, field: string) => {
+	const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>, field: string) => {
 		setFormData(data => ({
 			...data, [field]: e.target.value
 		}))
 	}
+	
 	return (
 		<form className="w-full px-6 flex items-center gap-x-4 border-b-4 border-b-blue-900 border-opacity-30 h-20">
 			<div className={`flex items-center w-2/5`}>
@@ -29,6 +30,7 @@ export function SearchBar() {
 					type="text"
 					name="filter"
 					value={formData.filter}
+					onChange={e => handleChange(e, 'filter')}
 					className="w-full rounded-xl px-3 py-2"
 					placeholder="Search a message or name"
 				/>
