@@ -19,6 +19,7 @@ export const emojiMap = {
 	PARTY: '🎉',
 	HANDSUP: '🙌🏻',
 }
+
 export const sortOptions = [
 	{
 		name: 'Date',
@@ -32,4 +33,11 @@ export const sortOptions = [
 		name: 'Emoji',
 		value: 'emoji',
 	},
-]
+];
+
+export const departments = [
+	{ name: "HR", value: "HR" },
+	{ name: "Engineering", value: "ENGINEERING" },
+	{ name: "Sales", value: "SALES" },
+	{ name: "Marketing", value: "MARKETING" },
+];

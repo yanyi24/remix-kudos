@@ -1,8 +1,10 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 type Profile {
-  firstName String
-  lastName  String
+  firstName      String
+  lastName       String
+  department     Department? @default(MARKETING)
+  profilePicture String?
 }
 
 generator client {
