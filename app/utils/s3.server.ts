@@ -11,12 +11,21 @@ const s3 = new S3({
 	secretAccessKey: process.env.KUDOS_SECRET_ACCESS_KEY,
 });
 
-const uploadHandler: UploadHandler = async ({ name, filename = '', stream }) => {
-	if (name !== "profile-pic") {
-		stream.resume();
-		return;
+async function convertToBuffer(data: AsyncIterable<Uint8Array>) {
+	const result = [];
+	for await (const chunk of data) {
+	  result.push(chunk);
 	}
+	return Buffer.concat(result);
+}
 
+const uploadHandler: UploadHandler = async ({ name, filename = '', contentType, data }) => {
+	const stream = await convertToBuffer(data);
+	
+	if (name !== "profile-pic") {
+		return undefined;
+	}
+	
 	const { Location } = await s3
 		.upload({
 			Bucket: process.env.KUDOS_BUCKET_NAME || "",
@@ -24,7 +33,6 @@ const uploadHandler: UploadHandler = async ({ name, filename = '', stream }) => 
 			Body: stream,
 		})
 		.promise();
-
 	return Location;
 };
 
@@ -35,6 +43,5 @@ export async function uploadAvatar(request: Request) {
 	);
 
 	const file = formData.get("profile-pic")?.toString() || "";
-
 	return file;
 }
