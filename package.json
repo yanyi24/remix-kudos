@@ -17,6 +17,7 @@
     "@remix-run/node": "^2.3.1",
     "@remix-run/react": "^2.3.1",
     "@remix-run/serve": "^2.3.1",
+    "@shopify/shopify-app-remix": "^2.1.0",
     "bcryptjs": "^2.4.3",
     "cuid": "^3.0.0",
     "isbot": "^3.6.8",
