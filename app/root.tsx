@@ -1,6 +1,6 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
 import styles from './styles/app.css';
-import type { MetaFunction, LinksFunction  } from "@remix-run/node";
+import { type MetaFunction, type LinksFunction, json, LoaderFunctionArgs } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -8,13 +8,25 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
+import shopify from '~/shopify.server';
+import { AppProvider } from "@shopify/shopify-app-remix/react";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles }
 ];
 
+export async function loader({ request }: LoaderFunctionArgs) {
+  await shopify.authenticate.admin(request);
+
+  return json({
+    apiKey: process.env.SHOPIFY_API_KEY,
+  });
+}
+
 export default function App() {
+  const { apiKey } = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
@@ -24,7 +36,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <AppProvider apiKey={apiKey} isEmbeddedApp>
+          <Outlet />
+        </AppProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
