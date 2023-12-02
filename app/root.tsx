@@ -17,16 +17,8 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles }
 ];
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  await shopify.authenticate.admin(request);
-
-  return json({
-    apiKey: process.env.SHOPIFY_API_KEY,
-  });
-}
 
 export default function App() {
-  const { apiKey } = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
@@ -36,9 +28,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <AppProvider apiKey={apiKey} isEmbeddedApp>
-          <Outlet />
-        </AppProvider>
+        <Outlet />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

@@ -21,7 +21,7 @@ export default function handleRequest(
   remixContext: EntryContext,
   loadContext: AppLoadContext
 ) {
-  shopify.addDocumentResponseHeaders(request, responseHeaders);
+  // shopify.addDocumentResponseHeaders(request, responseHeaders);
   return isbot(request.headers.get("user-agent"))
     ? handleBotRequest(
       request,
